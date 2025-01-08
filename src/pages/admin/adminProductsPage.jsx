@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
   const [productsLoaded, setProductsLoaded] = useState(false);
 
   useEffect(() => {
     if(!productsLoaded){
-      axios.get("import.meta.env.VITE_BACKEND_URL/api/products").then((res) => {
+      axios.get(import.meta.env.VITE_BACKEND_URL+"/api/products").then((res) => {
         
         setProducts(res.data);
         console.log(res.data);
@@ -18,6 +18,8 @@ export default function AdminProductsPage() {
       });
     }    
   }, [productsLoaded]);
+
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-100 p-6 relative">
@@ -92,7 +94,7 @@ export default function AdminProductsPage() {
                       onClick={()=>{
                         const token = localStorage.getItem("token");
 
-                        axios.delete(`import.meta.env.VITE_BACKEND_URL/api/products/${product.productId}`, {
+                        axios.delete(import.meta.env.VITE_BACKEND_URL+`/api/products/${product.productId}`, {
                           headers: {
                             Authorization: `Bearer ${token}`,
                           },
@@ -109,6 +111,9 @@ export default function AdminProductsPage() {
                     <button
                       className="text-blue-500 hover:text-blue-700"
                       title="Edit"
+                      onClick={()=>{
+                        navigate("/admin/products/editProduct" , {state : {product : product}});
+                      }}
                     >
                       <FaPencil />
                     </button>
