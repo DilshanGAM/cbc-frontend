@@ -7,6 +7,8 @@ export function loadCart() {
   }
 }
 
+
+
 export function addToCart(productId, qty){
   const cart = loadCart()
 
@@ -49,8 +51,9 @@ export function deleteItem(productId){
     }
   )
 
-  if(index!=-1){
+  if(index!=-1){    
     cart.splice(index,1)
+    saveCart(cart)
   }
 }
 //071 27 66 404
