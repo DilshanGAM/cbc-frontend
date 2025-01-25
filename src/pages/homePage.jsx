@@ -4,6 +4,8 @@ import LoginPage from './loginPage';
 import ProductOverview from './home/productOverview';
 import ProductPage from './home/product';
 import Cart from './home/cart';
+import ShippingPage from './home/shipping';
+import MyOrdersPage from './home/orders';
 export default function HomePage() {
   return (
     <div className="h-screen w-full">
@@ -15,6 +17,8 @@ export default function HomePage() {
           <Route path="/login" element={<LoginPage/>} />
 
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/shipping" element={<ShippingPage/>}/>   
+          <Route path='/orders' element={<MyOrdersPage/>}/>      
           <Route path="/productInfo/:id" element={<ProductOverview/>} />
         </Routes>  
       </div>
